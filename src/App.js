@@ -7,6 +7,7 @@ import {
   Button,
   Checkbox,
   FormControlLabel,
+  Divider,
 } from "@mui/material";
 import * as React from "react";
 import List from "@mui/material/List";
@@ -15,20 +16,18 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import EditIcon from "@mui/icons-material/Edit";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 
 function App() {
   return (
     <div>
-      <IconButton>
-        <PlaylistAddCheckRoundedIcon fontSize="large" color="primary" />
-        <Typography color={"red"}>ToDo List</Typography>
-      </IconButton>
+      <Typography color={"blue"} 
+      sx={{
+        fontSize: "3rem"
+      }}
+      >ToDo List</Typography>
       <TextField id="outlined-basic" label="Outlined" variant="outlined" />
       <Button variant="contained">Save</Button>
+      <Divider />
       <div>{CheckboxList()}</div>
     </div>
   );
@@ -36,16 +35,7 @@ function App() {
 
 export default App;
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-  height: 60,
-  lineHeight: "60px",
-}));
-
 function CheckboxList() {
-  const lightTheme = createTheme({ palette: { mode: "light" } });
   const [checked, setChecked] = React.useState([0]);
 
   const handleToggle = (value) => () => {
@@ -62,60 +52,38 @@ function CheckboxList() {
   };
 
   return (
-    <ThemeProvider theme={lightTheme}>
-      <Box
-        sx={{
-          // p: 2,
-          bgcolor: "background.default",
-          display: "grid",
-          gridTemplateColumns: { md: "1fr 1fr" },
-          // gap: 2,
-        }}
-      >
-        <List
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-        >
-          {[0, 1, 2, 3].map((value) => {
-            const labelId = `checkbox-list-label-${value}`;
+    <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+      {[0, 1, 2, 3].map((value) => {
+        const labelId = `checkbox-list-label-${value}`;
 
-            return (
-              <Item>
-                <ListItem
-                  key={value}
-                  secondaryAction={
-                    <IconButton edge="end" aria-label="comments">
-                      <EditIcon />
-                    </IconButton>
-                  }
-                  disablePadding
-                  elevation={20}
-                  style={{ margin: "20px" }}
-                >
-                  <ListItemButton
-                    role={undefined}
-                    onClick={handleToggle(value)}
-                    dense
-                  >
-                    <ListItemIcon>
-                      <Checkbox
-                        edge="start"
-                        checked={checked.indexOf(value) !== -1}
-                        tabIndex={-1}
-                        disableRipple
-                        inputProps={{ "aria-labelledby": labelId }}
-                      />
-                    </ListItemIcon>
-                    <ListItemText
-                      id={labelId}
-                      primary={`Line item ${value + 1}`}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              </Item>
-            );
-          })}
-        </List>
-      </Box>
-    </ThemeProvider>
+        return (
+          <ListItem
+            key={value}
+            secondaryAction={
+              <IconButton edge="end" aria-label="comments">
+                <EditIcon />
+              </IconButton>
+            }
+          >
+            <ListItemButton
+              role={undefined}
+              onClick={handleToggle(value)}
+              dense
+            >
+              <ListItemIcon>
+                <Checkbox
+                  edge="start"
+                  checked={checked.indexOf(value) !== -1}
+                  tabIndex={-1}
+                  disableRipple
+                  inputProps={{ "aria-labelledby": labelId }}
+                />
+              </ListItemIcon>
+              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+            </ListItemButton>
+          </ListItem>
+        );
+      })}
+    </List>
   );
 }
