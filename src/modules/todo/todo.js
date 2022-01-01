@@ -1,34 +1,34 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import { Typography, TextField, Button, Divider } from "@mui/material";
 import TodoList from "./todoList";
 import "./todo.css";
 
 const initialState = [
-    {
-        id: 42343,
-        todo: "one",
-        done: false,
-    },
-]
+  {
+    id: 42343,
+    todo: "one",
+    done: false,
+  },
+];
 
 function Todo() {
-    const [todoFormValue, settodoFormValue] = useState("");
-    const [todoDataList, setTodoDataList] = useState(initialState);
-    const [errorMsg, setErrorMsg] = useState(null);
-    
+  const [todoFormValue, settodoFormValue] = useState("");
+  const [todoDataList, setTodoDataList] = useState(initialState);
+  const [errorMsg, setErrorMsg] = useState(null);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (todoFormValue === "") {
-        setErrorMsg("The Input box is empty");
-        return;
+      setErrorMsg("The Input box is empty");
+      return;
     }
     const dataObj = {
-        id: 10,
-        todo: todoFormValue,
-        done: false,
-    }
+      id: 10,
+      todo: todoFormValue,
+      done: false,
+    };
     console.log("dataObj", dataObj);
-    setTodoDataList([...todoDataList, dataObj])
+    setTodoDataList([...todoDataList, dataObj]);
     settodoFormValue("");
   };
 
@@ -38,15 +38,15 @@ function Todo() {
     }
   };
   const handleOnChange = (e) => {
-      setErrorMsg(null);
-      settodoFormValue(e.target.value);
-  }
+    setErrorMsg(null);
+    settodoFormValue(e.target.value);
+  };
   return (
     <div className="todo-wrapper">
       <Typography
-        color={"blue"}
         sx={{
           fontSize: "3rem",
+          color: "rgb(25, 118, 210)",
         }}
       >
         ToDo List
@@ -63,7 +63,6 @@ function Todo() {
           value={todoFormValue}
           error={errorMsg != null}
           helperText={errorMsg}
-          
         />
         <Button
           variant="contained"
@@ -75,7 +74,7 @@ function Todo() {
         </Button>
       </form>
       <Divider sx={{ marginTop: "10px" }} />
-      <TodoList todoDataList={todoDataList}/>
+      <TodoList todoDataList={todoDataList} />
     </div>
   );
 }
