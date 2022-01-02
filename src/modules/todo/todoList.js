@@ -34,11 +34,11 @@ export default function TodoList({ todoDataList }) {
         paddingBottom: "0px",
       }}
     >
-      {todoDataList.map((value) => {
+      {todoDataList?.map((value) => {
         const labelId = `checkbox-list-label-${value}`;
 
         return (
-          <div key={value.id}>
+          <div key={value._id}>
             <ListItem
               key={value.id}
               secondaryAction={
