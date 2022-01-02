@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, TextField, Button, Divider } from "@mui/material";
 import TodoList from "./todoList";
 import "./todo.css";
-
-const initialState = [
-  {
-    id: 42343,
-    todo: "one",
-    done: false,
-  },
-];
+import { useSelector, useDispatch } from "react-redux";
+import { fetchToDoList, addToDoInList } from "./todoSlice";
 
 function Todo() {
   const [todoFormValue, settodoFormValue] = useState("");
-  const [todoDataList, setTodoDataList] = useState(initialState);
   const [errorMsg, setErrorMsg] = useState(null);
+  const todoList = useSelector((state) => state.todo.todoList);
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(fetchToDoList());
+  // });
+
+  console.log("todoList value is", todoList);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +29,7 @@ function Todo() {
       done: false,
     };
     console.log("dataObj", dataObj);
-    setTodoDataList([...todoDataList, dataObj]);
+    dispatch(addToDoInList(dataObj));
     settodoFormValue("");
   };
 
@@ -74,7 +75,7 @@ function Todo() {
         </Button>
       </form>
       <Divider sx={{ marginTop: "10px" }} />
-      <TodoList todoDataList={todoDataList} />
+      <TodoList todoDataList={todoList.data} />
     </div>
   );
 }
