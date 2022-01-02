@@ -3,7 +3,7 @@ import { Typography, TextField, Button, Divider } from "@mui/material";
 import TodoList from "./todoList";
 import "./todo.css";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchToDoList, addToDoInList } from "./todoSlice";
+import { addToDoInList } from "./todoSlice";
 
 function Todo() {
   const [todoFormValue, settodoFormValue] = useState("");
@@ -11,9 +11,9 @@ function Todo() {
   const todoList = useSelector((state) => state.todo.todoList);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchToDoList());
-  // });
+  useEffect(() => {
+    dispatch({type: "TODO_FETCH_REQUESTED"});
+  },[dispatch]);
 
   console.log("todoList value is", todoList);
 
