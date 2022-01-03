@@ -3,7 +3,6 @@ import { Typography, TextField, Button, Divider } from "@mui/material";
 import TodoList from "./todoList";
 import "./todo.css";
 import { useSelector, useDispatch } from "react-redux";
-import { addToDoInList } from "./todoSlice";
 
 function Todo() {
   const [todoFormValue, settodoFormValue] = useState("");
@@ -12,10 +11,8 @@ function Todo() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({type: "TODO_FETCH_REQUESTED"});
-  },[dispatch]);
-
-  console.log("todoList value is", todoList);
+    dispatch({ type: "TODO_FETCH_REQUESTED" });
+  }, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,12 +21,13 @@ function Todo() {
       return;
     }
     const dataObj = {
-      id: 10,
       todo: todoFormValue,
       done: false,
     };
-    console.log("dataObj", dataObj);
-    dispatch(addToDoInList(dataObj));
+    dispatch({
+      type: "ADD_TODO",
+      payload: dataObj,
+    });
     settodoFormValue("");
   };
 
