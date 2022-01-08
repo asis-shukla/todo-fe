@@ -11,7 +11,7 @@ function Todo() {
 
   useEffect(() => {
     todoController.fetchAllTodos();
-  });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
