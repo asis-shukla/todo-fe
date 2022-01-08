@@ -11,6 +11,7 @@ function Todo() {
 
   useEffect(() => {
     todoController.fetchAllTodos();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSubmit = (e) => {

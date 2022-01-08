@@ -29,8 +29,10 @@ function* addToDo(action) {
 function* deleteAllTodos(action) {
   try {
     const response = yield call(deleteAllToDos);
-    // yield put(addToDoInList(response));
-    console.log("delete all response is", response);
+    console.log(response);
+    if (response.deletedCount) {
+      yield put(fetchToDoList([]));
+    }
   } catch (error) {
     throw console.error(error);
   }
