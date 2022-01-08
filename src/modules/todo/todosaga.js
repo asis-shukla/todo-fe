@@ -1,6 +1,11 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { fetchToDoData, addToDoData } from "../../apiHandlers/api";
+import {
+  fetchToDoData,
+  addToDoData,
+  deleteAllToDos,
+} from "../../apiHandlers/api";
 import { fetchToDoList, addToDoInList } from "./todoSlice";
+import { todoActionConstansts } from "./todoActionConstansts";
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 function* fetchToDos(action) {
@@ -21,9 +26,20 @@ function* addToDo(action) {
   }
 }
 
+function* deleteAllTodos(action) {
+  try {
+    const response = yield call(deleteAllToDos);
+    // yield put(addToDoInList(response));
+    console.log("delete all response is", response);
+  } catch (error) {
+    throw console.error(error);
+  }
+}
+
 function* todoSaga() {
-  yield takeLatest("TODO_FETCH_REQUESTED", fetchToDos);
-  yield takeLatest("ADD_TODO", addToDo);
+  yield takeLatest(todoActionConstansts.TODO_FETCH_REQUESTED, fetchToDos);
+  yield takeLatest(todoActionConstansts.ADD_NEW_TODO, addToDo);
+  yield takeLatest(todoActionConstansts.DELETE_ALL_TODOS, deleteAllTodos);
 }
 
 export default todoSaga;

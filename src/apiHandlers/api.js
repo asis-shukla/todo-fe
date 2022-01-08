@@ -16,6 +16,21 @@ export function fetchToDoData() {
 export function addToDoData(payloadBody) {
   return axios
     .post(todoUrl, payloadBody)
-    .then((res) => { return res.data})
-    .catch((err) => { return err });
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      return err;
+    });
+}
+
+export function deleteAllToDos(params) {
+  return axios
+    .delete(todoUrl)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      return err;
+    });
 }

@@ -2,17 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Typography, TextField, Button, Divider } from "@mui/material";
 import TodoList from "./todoList";
 import "./todo.css";
-import { useSelector, useDispatch } from "react-redux";
+import { TodoController } from "./todoController";
 
 function Todo() {
   const [todoFormValue, settodoFormValue] = useState("");
   const [errorMsg, setErrorMsg] = useState(null);
-  const todoList = useSelector((state) => state.todo.todoList);
-  const dispatch = useDispatch();
+  const todoController = TodoController();
 
   useEffect(() => {
-    dispatch({ type: "TODO_FETCH_REQUESTED" });
-  }, [dispatch]);
+    todoController.fetchAllTodos();
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,10 +23,7 @@ function Todo() {
       todo: todoFormValue,
       done: false,
     };
-    dispatch({
-      type: "ADD_TODO",
-      payload: dataObj,
-    });
+    todoController.addNewTodo(dataObj);
     settodoFormValue("");
   };
 
@@ -40,6 +36,11 @@ function Todo() {
     setErrorMsg(null);
     settodoFormValue(e.target.value);
   };
+
+  const handleAllDelete = (e) => {
+    todoController.deleteAllTodos();
+  };
+
   return (
     <div className="todo-wrapper">
       <Typography
@@ -72,8 +73,16 @@ function Todo() {
           Save
         </Button>
       </form>
+      <Button
+        variant="contained"
+        color="error"
+        sx={{ margin: "10px 0px 5px 0px" }}
+        onClick={handleAllDelete}
+      >
+        Delete All
+      </Button>
       <Divider sx={{ marginTop: "10px" }} />
-      <TodoList todoDataList={todoList.data} />
+      <TodoList todoDataList={todoController.todoList.data} />
     </div>
   );
 }
