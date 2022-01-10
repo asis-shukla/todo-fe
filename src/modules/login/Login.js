@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
 
 const initialLoginFormState = {
-  username: "",
+  email: "",
   password: "",
 };
 
@@ -33,23 +33,25 @@ function Login() {
       <h1>Log In</h1>
       <form>
         <TextField
-          type="text"
+          type={"email"}
           fullWidth={true}
-          label="Username"
-          name="username"
+          required={true}
+          label="Email"
+          name="email"
           variant="outlined"
           autoFocus={true}
           onChange={handleOnChange}
-          value={loginFormState.username}
+          value={loginFormState.email}
           // error={errorMsg != null}
           // helperText={errorMsg}
-          autoComplete="username"
+          autoComplete="email"
         />
         <br />
         <br />
         <TextField
           type="password"
           name="password"
+          required={true}
           fullWidth={true}
           label="Password"
           autoComplete="password"
