@@ -3,7 +3,7 @@ import {
   fetchToDoData,
   addToDoData,
   deleteAllToDos,
-} from "../../apiHandlers/api";
+} from "./todoApiHandler";
 import { fetchToDoList, addToDoInList } from "./todoSlice";
 import { todoActionConstansts } from "./todoActionConstansts";
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
+import UserController from "./state-logic/userController";
 
 const initialRegisterFormState = {
   fullname: "",
@@ -8,6 +9,7 @@ const initialRegisterFormState = {
 };
 
 function Register() {
+  const userController = UserController();
   const [registerFormState, setRegisterFormState] = useState(
     initialRegisterFormState
   );
@@ -15,6 +17,7 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("entered data", registerFormState);
+    userController.registerNewUser(registerFormState);
     setRegisterFormState(initialRegisterFormState);
   };
 
