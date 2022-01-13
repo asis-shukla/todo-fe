@@ -7,6 +7,6 @@ export const addNewUser = async (payloadBody) => {
     const response = await axios.post(usersUrl, payloadBody);
     return response.data;
   } catch (error) {
-    console.log("post api error", error);
+    console.log("post api error is", error);
   }
 };

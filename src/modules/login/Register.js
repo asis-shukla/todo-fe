@@ -16,7 +16,6 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("entered data", registerFormState);
     userController.registerNewUser(registerFormState);
     setRegisterFormState(initialRegisterFormState);
   };
