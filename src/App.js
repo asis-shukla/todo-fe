@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-// import Todo from "./modules/todo/todo";
+import Todo from "./modules/todo/todo";
 import LoginRegister from "./modules/login/LoginRegister";
 
 function App() {
+  const [loggedInUser, setloggedInUser] = useState(null);
   return (
     <>
-      <LoginRegister />
-      {/* <Todo /> */}
+      {loggedInUser ? (
+        <Todo loggedInUser={loggedInUser} />
+      ) : (
+        <LoginRegister setloggedInUser={setloggedInUser} />
+      )}
     </>
   );
 }

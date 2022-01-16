@@ -14,7 +14,6 @@ function* registerNewUser(action) {
 }
 
 function* makeUserlogin(action) {
-  console.log(action.payload);
   const response = yield call(loginUser, action.payload);
   if (!response?.error) {
     yield put(setLoggedInUser(response));

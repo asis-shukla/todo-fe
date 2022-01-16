@@ -4,7 +4,7 @@ import Login from "./Login";
 import Register from "./Register";
 import UserController from "./state-logic/userController";
 
-function LoginRegister() {
+function LoginRegister({ setloggedInUser }) {
   const [showLoginForm, setshowLoginForm] = useState(true);
   const userController = UserController();
 
@@ -20,6 +20,17 @@ function LoginRegister() {
       }
     }
   }, [userController.addNewUserStatus, setshowLoginForm]);
+
+  useEffect(() => {
+    if (
+      userController.loggedInUserData &&
+      !userController.loggedInUserData.error
+    ) {
+      setloggedInUser(userController.loggedInUserData);
+    } else {
+      setloggedInUser(null);
+    }
+  }, [userController.loggedInUserData, setloggedInUser]);
 
   const renderRequiredForm = () => {
     if (showLoginForm) {
