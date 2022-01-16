@@ -5,13 +5,11 @@ import userActionConstants from "./userConstants";
 import { setAddNewUserStatus } from "./userSlice";
 
 function* registerNewUser(action) {
-  try {
-    const response = yield call(addNewUser, action.payload);
-    console.log("success response is", response);
-    yield put(setAddNewUserStatus(true));
-  } catch (error) {
-    console.log("error is ", error);
-    yield put(setAddNewUserStatus(false));
+  const response = yield call(addNewUser, action.payload);
+  if (!response.error) {
+    yield put(setAddNewUserStatus(response));
+  } else {
+    yield put(setAddNewUserStatus(response));
   }
 }
 

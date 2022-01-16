@@ -9,7 +9,16 @@ function LoginRegister() {
   const userController = UserController();
 
   useEffect(() => {
-    setshowLoginForm(userController.addNewUserStatus);
+    if (userController.addNewUserStatus) {
+      const { error } = userController.addNewUserStatus;
+      if (error && error.type === "VALIDATION_ERROR") {
+        setshowLoginForm(false);
+      } else if (error && error.type === "DUPLICATE_RESOURCE_ERROR") {
+        setshowLoginForm(true);
+      } else {
+        setshowLoginForm(true);
+      }
+    }
   }, [userController.addNewUserStatus, setshowLoginForm]);
 
   const renderRequiredForm = () => {
