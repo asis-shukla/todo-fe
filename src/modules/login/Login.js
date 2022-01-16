@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
+import UserController from "./state-logic/userController";
 
 const initialLoginFormState = {
   email: "",
@@ -7,11 +8,12 @@ const initialLoginFormState = {
 };
 
 function Login() {
+  const userController = UserController();
   const [loginFormState, setloginFormState] = useState(initialLoginFormState);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("entered data", loginFormState);
+    userController.makeUserlogin(loginFormState);
     setloginFormState(initialLoginFormState);
   };
 

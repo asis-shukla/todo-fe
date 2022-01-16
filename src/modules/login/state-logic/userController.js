@@ -12,16 +12,24 @@ const UserController = () => {
     });
   };
 
+  const makeUserlogin = (userData) => {
+    dispatch({
+      type: userActionConstants.GET_USER_LOGIN,
+      payload: userData,
+    });
+  };
+
   const resetAddNewUserStatus = () => {
     dispatch(setAddNewUserStatus(null));
   };
-  
+
   const addNewUserStatus = useSelector((state) => state.user.addNewUserStatus);
 
   const loggedInUserData = useSelector((state) => state.user.loggedInUser);
 
   return {
     registerNewUser,
+    makeUserlogin,
     loggedInUserData,
     addNewUserStatus,
     resetAddNewUserStatus,

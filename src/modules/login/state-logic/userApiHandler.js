@@ -11,3 +11,13 @@ export const addNewUser = async (payloadBody) => {
     return error.response.data;
   }
 };
+
+export const loginUser = async (payloadBody) => {
+  try {
+    const response = await axios.post(`${usersUrl}/login`, payloadBody);
+    return response.data;
+  } catch (error) {
+    console.log("Login User error", error);
+    return error.response.data;
+  }
+};
