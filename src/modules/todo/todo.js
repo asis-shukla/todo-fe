@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, TextField, Button, Divider } from "@mui/material";
 import TodoList from "./todoList";
 import "./todo.css";
@@ -9,10 +9,10 @@ function Todo({ loggedInUser }) {
   const [errorMsg, setErrorMsg] = useState(null);
   const todoController = TodoController();
 
-  // useEffect(() => {
-  //   todoController.fetchAllTodos();
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  useEffect(() => {
+    todoController.fetchAllTodos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,16 +44,19 @@ function Todo({ loggedInUser }) {
 
   return (
     <div className="todo-wrapper">
-      <p>Name: {loggedInUser.fullname}</p>
-      <p>Email: {loggedInUser.email}</p>
-      <p>UserId: {loggedInUser._id}</p>
+      <p>
+        Welcome <strong><em>{loggedInUser.fullname}</em></strong>🙂
+      </p>
+      <p>
+        Email: <em> {loggedInUser.email} </em>
+      </p>
       <Typography
         sx={{
-          fontSize: "3rem",
+          fontSize: "2rem",
           color: "rgb(25, 118, 210)",
         }}
       >
-        ToDo List
+        Todo List
       </Typography>
       <form>
         <TextField

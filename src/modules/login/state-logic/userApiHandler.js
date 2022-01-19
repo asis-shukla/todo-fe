@@ -15,6 +15,8 @@ export const addNewUser = async (payloadBody) => {
 export const loginUser = async (payloadBody) => {
   try {
     const response = await axios.post(`${usersUrl}/login`, payloadBody);
+    const access_token = response.data.token;
+    axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
     return response.data;
   } catch (error) {
     console.log("Login User error", error);
