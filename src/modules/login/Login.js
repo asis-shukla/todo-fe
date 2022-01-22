@@ -64,7 +64,7 @@ function Login() {
         <br />
         <br />
         <Button type="submit" variant="contained" onClick={handleSubmit}>
-          <span>LogIn</span>
+          LogIn
         </Button>
       </form>
     </div>
