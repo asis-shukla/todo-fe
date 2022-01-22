@@ -27,18 +27,16 @@ export default function TodoList({ todoDataList }) {
   return (
     <List
       sx={{
-        width: "100%",
-        maxWidth: 360,
-        bgcolor: "background.paper",
         paddingTop: "0px",
         paddingBottom: "0px",
+        margin:"auto"
       }}
     >
       {todoDataList?.map((value) => {
         const labelId = `checkbox-list-label-${value}`;
 
         return (
-          <div key={value._id}>
+          <>
             <ListItem
               key={value.id}
               secondaryAction={
@@ -66,7 +64,7 @@ export default function TodoList({ todoDataList }) {
               </ListItemButton>
             </ListItem>
             <Divider />
-          </div>
+          </>
         );
       })}
     </List>

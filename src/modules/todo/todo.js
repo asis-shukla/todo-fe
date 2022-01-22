@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Typography, TextField, Button, Divider } from "@mui/material";
+import { TextField, Button, Divider, Container } from "@mui/material";
 import TodoList from "./todoList";
 import "./todo.css";
 import { TodoController } from "./todoController";
@@ -43,28 +43,22 @@ function Todo({ loggedInUser }) {
   };
 
   return (
-    <div className="todo-wrapper">
-      <p>
-        Welcome <strong><em>{loggedInUser.fullname}</em></strong>🙂
-      </p>
-      <p>
-        Email: <em> {loggedInUser.email} </em>
-      </p>
-      <Typography
-        sx={{
-          fontSize: "2rem",
-          color: "rgb(25, 118, 210)",
-        }}
-      >
-        Todo List
-      </Typography>
+    <Container
+      sx={{
+        mt: "30px",
+        textAlign:"center"
+      }}
+    >
       <form>
         <TextField
           id="todo-text"
-          label="Your Todo"
+          sx={{
+            width:"70%"
+          }}
+          label="Add New Todo"
           variant="outlined"
           autoFocus={true}
-          size="small"
+          size="medium"
           onKeyPress={handleOnKeyPress}
           onChange={handleOnChange}
           value={todoFormValue}
@@ -73,9 +67,10 @@ function Todo({ loggedInUser }) {
         />
         <Button
           variant="contained"
-          sx={{ margin: "0px 10px 0px 10px" }}
+          sx={{ margin: "5px 10px 0px 10px", width:"16%" }}
           type="submit"
           onClick={handleSubmit}
+          size="large"
         >
           Save
         </Button>
@@ -90,7 +85,7 @@ function Todo({ loggedInUser }) {
       </Button>
       <Divider sx={{ marginTop: "10px" }} />
       <TodoList todoDataList={todoController.todoList.data} />
-    </div>
+    </Container>
   );
 }
 
