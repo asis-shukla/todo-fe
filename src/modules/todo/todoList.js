@@ -29,16 +29,17 @@ export default function TodoList({ todoDataList }) {
       sx={{
         paddingTop: "0px",
         paddingBottom: "0px",
-        margin:"auto"
+        margin: "auto",
       }}
     >
       {todoDataList?.map((value) => {
         const labelId = `checkbox-list-label-${value}`;
 
         return (
-          <>
+          <div key={value._id}>
             <ListItem
-              key={value.id}
+              key={value._id}
+              id={value._id}
               secondaryAction={
                 <IconButton edge="end" aria-label="comments">
                   <EditIcon />
@@ -60,11 +61,11 @@ export default function TodoList({ todoDataList }) {
                     inputProps={{ "aria-labelledby": labelId }}
                   />
                 </ListItemIcon>
-                <ListItemText id={value.id} primary={value.todo} />
+                <ListItemText id={value._id} primary={value.todo} />
               </ListItemButton>
             </ListItem>
             <Divider />
-          </>
+          </div>
         );
       })}
     </List>

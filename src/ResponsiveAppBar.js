@@ -46,8 +46,8 @@ const ResponsiveAppBar = ({ handleLogOut, loggedInUser }) => {
             ) : null}
           </Box>
 
-          <MenuItem>
-            <LogoutIcon onClick={handleLogOut} />
+          <MenuItem onClick={handleLogOut}>
+            <LogoutIcon/>
             Log Out
           </MenuItem>
         </Toolbar>

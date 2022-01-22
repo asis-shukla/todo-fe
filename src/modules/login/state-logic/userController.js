@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import userActionConstants from "./userConstants";
-import { setAddNewUserStatus } from "./userSlice";
+import { setAddNewUserStatus, setLoggedInUser } from "./userSlice";
 
 const UserController = () => {
   const dispatch = useDispatch();
@@ -23,6 +23,10 @@ const UserController = () => {
     dispatch(setAddNewUserStatus(null));
   };
 
+  const setUserLoginData = (userData) => {
+    dispatch(setLoggedInUser(userData));
+  } 
+
   const addNewUserStatus = useSelector((state) => state.user.addNewUserStatus);
 
   const loggedInUserData = useSelector((state) => state.user.loggedInUser);
@@ -33,6 +37,7 @@ const UserController = () => {
     loggedInUserData,
     addNewUserStatus,
     resetAddNewUserStatus,
+    setUserLoginData
   };
 };
 
