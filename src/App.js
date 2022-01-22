@@ -11,10 +11,12 @@ function App() {
 
   useEffect(() => {
     const access_token = localStorage.getItem("access-token");
-    axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
+    if (access_token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
     const userDetails = window.atob(access_token.split(".")[1]);
     setloggedInUser(JSON.parse(userDetails));
-    setLoggedInUser(JSON.parse(userDetails))
+    setLoggedInUser(JSON.parse(userDetails)) 
+    }
   }, []);
 
   return (
