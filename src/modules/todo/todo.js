@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Button, Divider, Container } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import TodoList from "./todoList";
 import "./todo.css";
 import { TodoController } from "./todoController";
@@ -90,10 +91,14 @@ function Todo({ loggedInUser }) {
         Delete All
       </Button>
       <Divider sx={{ marginTop: "10px" }} />
-      <TodoList
-        todoDataList={todoController.todoList.data}
-        updateTodo={updateTodo}
-      />
+      {todoController.isTodoListLoading ? (
+        <CircularProgress />
+      ) : (
+        <TodoList
+          todoDataList={todoController.todoList.data}
+          updateTodo={updateTodo}
+        />
+      )}
     </Container>
   );
 }

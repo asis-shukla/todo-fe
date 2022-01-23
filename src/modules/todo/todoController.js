@@ -11,6 +11,7 @@ export const TodoController = () => {
   };
 
   const todoList = useSelector((state) => state.todo.todoList);
+  const isTodoListLoading = useSelector((state) => state.todo.isTodoListLoading);
 
   const addNewTodo = (payload) => {
     dispatch({
@@ -39,5 +40,6 @@ export const TodoController = () => {
     addNewTodo,
     deleteAllTodos,
     updateSingleTodo,
+    isTodoListLoading
   };
 };

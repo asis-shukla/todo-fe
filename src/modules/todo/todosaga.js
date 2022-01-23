@@ -5,14 +5,21 @@ import {
   deleteAllToDos,
   updateTodoCall,
 } from "./todoApiHandler";
-import { fetchToDoList, addToDoInList, updateTodo } from "./todoSlice";
+import {
+  fetchToDoList,
+  addToDoInList,
+  updateTodo,
+  todoListLoading,
+} from "./todoSlice";
 import { todoActionConstansts } from "./todoActionConstansts";
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 function* fetchToDos(action) {
   try {
+    yield put(todoListLoading(true));
     const todoData = yield call(fetchToDoData);
     yield put(fetchToDoList(todoData));
+    yield put(todoListLoading(false));
   } catch (err) {
     throw console.error(err);
   }
