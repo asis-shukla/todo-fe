@@ -45,15 +45,17 @@ function Todo({ loggedInUser }) {
   return (
     <Container
       sx={{
-        mt: "30px",
-        textAlign:"center"
+        mt: "20px",
+        textAlign:"center",
+        pl:"4px",
+        pr: "4px"
       }}
     >
       <form>
         <TextField
           id="todo-text"
           sx={{
-            width:"70%"
+            width:"75%"
           }}
           label="Add New Todo"
           variant="outlined"
@@ -67,7 +69,7 @@ function Todo({ loggedInUser }) {
         />
         <Button
           variant="contained"
-          sx={{ margin: "5px 10px 0px 10px", width:"16%" }}
+          sx={{ margin: "5px 6px 0px 6px", width:"18%" }}
           type="submit"
           onClick={handleSubmit}
           size="large"

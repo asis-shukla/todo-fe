@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Todo from "./modules/todo/todo";
 import LoginRegister from "./modules/login/LoginRegister";
-import { Container } from "@mui/material";
 import axios from "axios";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 
@@ -26,7 +25,7 @@ function App() {
   };
 
   return (
-    <Container>
+    <div>
       <ResponsiveAppBar
         handleLogOut={handleLogOut}
         loggedInUser={loggedInUser}
@@ -36,7 +35,7 @@ function App() {
       ) : (
         <LoginRegister setloggedInUser={setloggedInUser} />
       )}
-    </Container>
+    </div>
   );
 }
 

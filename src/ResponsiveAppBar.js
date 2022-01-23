@@ -10,7 +10,7 @@ import { MenuItem } from "@mui/material";
 const ResponsiveAppBar = ({ handleLogOut, loggedInUser }) => {
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container>
         <Toolbar disableGutters>
           <Typography
             variant="h6"
@@ -21,15 +21,7 @@ const ResponsiveAppBar = ({ handleLogOut, loggedInUser }) => {
             Todo App
           </Typography>
 
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-          >
-            Todo App
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "Grid", md: "flex" } }}>
             {loggedInUser ? (
               <>
                 <span>
@@ -40,7 +32,7 @@ const ResponsiveAppBar = ({ handleLogOut, loggedInUser }) => {
                   🙂
                 </span>
                 <span style={{ marginLeft: "30px" }}>
-                  Email: <em> {loggedInUser.email} </em>
+                  <em> {loggedInUser.email} </em>
                 </span>
               </>
             ) : null}
