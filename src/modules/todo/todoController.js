@@ -25,10 +25,19 @@ export const TodoController = () => {
     });
   };
 
+  const updateSingleTodo = (payload, id) => {
+    dispatch({
+      type: todoActionConstansts.UPDATE_SINGLE_TODO,
+      payload: payload,
+      id: id,
+    });
+  };
+
   return {
     fetchAllTodos,
     todoList,
     addNewTodo,
     deleteAllTodos,
+    updateSingleTodo,
   };
 };

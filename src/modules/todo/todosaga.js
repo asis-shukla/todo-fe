@@ -3,8 +3,9 @@ import {
   fetchToDoData,
   addToDoData,
   deleteAllToDos,
+  updateTodoCall,
 } from "./todoApiHandler";
-import { fetchToDoList, addToDoInList } from "./todoSlice";
+import { fetchToDoList, addToDoInList, updateTodo } from "./todoSlice";
 import { todoActionConstansts } from "./todoActionConstansts";
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
@@ -38,10 +39,22 @@ function* deleteAllTodos(action) {
   }
 }
 
+function* updateSingletodo(action) {
+  const response = yield call(updateTodoCall, action.payload, action.id);
+  if (!response.error) {
+    const todoData = yield call(fetchToDoData);
+    yield put(fetchToDoList(todoData));
+    // yield put(updateTodo)
+  } else {
+    console.log("response error is", response);
+  }
+}
+
 function* todoSaga() {
   yield takeLatest(todoActionConstansts.TODO_FETCH_REQUESTED, fetchToDos);
   yield takeLatest(todoActionConstansts.ADD_NEW_TODO, addToDo);
   yield takeLatest(todoActionConstansts.DELETE_ALL_TODOS, deleteAllTodos);
+  yield takeLatest(todoActionConstansts.UPDATE_SINGLE_TODO, updateSingletodo);
 }
 
 export default todoSaga;

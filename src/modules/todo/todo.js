@@ -42,20 +42,24 @@ function Todo({ loggedInUser }) {
     todoController.deleteAllTodos();
   };
 
+  const updateTodo = (payload, id) => {
+    todoController.updateSingleTodo(payload, id);
+  };
+
   return (
     <Container
       sx={{
         mt: "20px",
-        textAlign:"center",
-        pl:"4px",
-        pr: "4px"
+        textAlign: "center",
+        pl: "4px",
+        pr: "4px",
       }}
     >
       <form>
         <TextField
           id="todo-text"
           sx={{
-            width:"75%"
+            width: "75%",
           }}
           label="Add New Todo"
           variant="outlined"
@@ -69,7 +73,7 @@ function Todo({ loggedInUser }) {
         />
         <Button
           variant="contained"
-          sx={{ margin: "5px 6px 0px 6px", width:"18%" }}
+          sx={{ margin: "5px 6px 0px 6px", width: "18%" }}
           type="submit"
           onClick={handleSubmit}
           size="large"
@@ -86,7 +90,10 @@ function Todo({ loggedInUser }) {
         Delete All
       </Button>
       <Divider sx={{ marginTop: "10px" }} />
-      <TodoList todoDataList={todoController.todoList.data} />
+      <TodoList
+        todoDataList={todoController.todoList.data}
+        updateTodo={updateTodo}
+      />
     </Container>
   );
 }

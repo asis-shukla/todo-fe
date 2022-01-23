@@ -34,3 +34,14 @@ export function deleteAllToDos(params) {
       return err;
     });
 }
+
+export function updateTodoCall(payloadBody, id) {
+  return axios
+    .put(`${todoUrl}/${id}`, payloadBody)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      return err;
+    });
+}

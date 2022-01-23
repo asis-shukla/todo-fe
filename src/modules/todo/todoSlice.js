@@ -18,10 +18,11 @@ export const todoSlice = createSlice({
     addToDoInList: (state, action) => {
       state.todoList.data.push(action.payload);
     },
+    updateTodo: (state, action) => {},
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { fetchToDoList, addToDoInList } = todoSlice.actions;
+export const { fetchToDoList, addToDoInList, updateTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;

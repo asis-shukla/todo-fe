@@ -6,22 +6,23 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import EditIcon from "@mui/icons-material/Edit";
-import Divider from "@mui/material/Divider";
 
-export default function TodoList({ todoDataList }) {
-  const [checked, setChecked] = React.useState([0]);
-
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
+export default function TodoList({ todoDataList, updateTodo }) {
+  const handleToggle = (e) => {
+    let todoID = e.target.offsetParent.id;
+    if (!todoID) {
+      todoID = e.target.id;
     }
-
-    setChecked(newChecked);
+    if (todoID) {
+      const clickedTodo = todoDataList.find((item) => {
+        return item._id === todoID;
+      });
+      const editPayload = {
+        todo: clickedTodo.todo,
+        done: !clickedTodo.done,
+      };
+      updateTodo(editPayload, todoID);
+    }
   };
 
   return (
@@ -36,36 +37,36 @@ export default function TodoList({ todoDataList }) {
         const labelId = `checkbox-list-label-${value}`;
 
         return (
-          <div key={value._id}>
-            <ListItem
-              key={value._id}
-              id={value._id}
-              secondaryAction={
-                <IconButton edge="end" aria-label="comments">
-                  <EditIcon />
-                </IconButton>
-              }
-              sx={{ padding: "0px" }}
-            >
-              <ListItemButton
-                role={undefined}
-                onClick={handleToggle(value)}
-                dense
-              >
-                <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    checked={checked.indexOf(value) !== -1}
-                    tabIndex={-1}
-                    disableRipple
-                    inputProps={{ "aria-labelledby": labelId }}
-                  />
-                </ListItemIcon>
-                <ListItemText id={value._id} primary={value.todo} />
-              </ListItemButton>
-            </ListItem>
-            <Divider />
-          </div>
+          <ListItem
+            id={value._id}
+            key={value._id}
+            secondaryAction={
+              <IconButton edge="end" aria-label="comments">
+                <EditIcon />
+              </IconButton>
+            }
+            sx={{ padding: "0px" }}
+            divider={true}
+          >
+            <ListItemButton id={value._id} onClick={handleToggle} dense>
+              <ListItemIcon id={value._id}>
+                <Checkbox
+                  edge="start"
+                  id={value._id}
+                  checked={value.done}
+                  tabIndex={-1}
+                  inputProps={{ "aria-labelledby": labelId }}
+                />
+              </ListItemIcon>
+              <ListItemText
+                id={value._id}
+                primary={value.todo}
+                sx={{
+                  textDecoration: value.done ? "line-through" : "none",
+                }}
+              />
+            </ListItemButton>
+          </ListItem>
         );
       })}
     </List>
