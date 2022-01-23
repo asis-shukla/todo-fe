@@ -18,7 +18,17 @@ export const todoSlice = createSlice({
     addToDoInList: (state, action) => {
       state.todoList.data.push(action.payload);
     },
-    updateTodo: (state, action) => {},
+    updateTodo: (state, action) => {
+      const responsePayload = action.payload;
+      const newTodoDataList = state.todoList.data.map((item) => {
+        if (item._id === responsePayload._id) {
+          return responsePayload;
+        } else {
+          return item;
+        }
+      });
+      state.todoList.data = newTodoDataList;
+    },
   },
 });
 

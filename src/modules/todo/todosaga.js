@@ -42,11 +42,9 @@ function* deleteAllTodos(action) {
 function* updateSingletodo(action) {
   const response = yield call(updateTodoCall, action.payload, action.id);
   if (!response.error) {
-    const todoData = yield call(fetchToDoData);
-    yield put(fetchToDoList(todoData));
-    // yield put(updateTodo)
+    yield put(updateTodo(response));
   } else {
-    console.log("response error is", response);
+    console.error("response error is", response);
   }
 }
 
