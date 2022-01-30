@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Container } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import Login from "./Login";
 import Register from "./Register";
 import UserController from "./state-logic/userController";
@@ -40,7 +41,9 @@ function LoginRegister({ setloggedInUser }) {
     }
   };
 
-  return (
+  return userController.isUserRegisterLoading ? (
+    <CircularProgress />
+  ) : (
     <Container maxWidth="sm">
       {renderRequiredForm()}
       <span style={{ marginLeft: "35%" }}>

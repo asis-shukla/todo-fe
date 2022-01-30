@@ -6,10 +6,13 @@ import {
   setAddNewUserStatus,
   setLoggedInUser,
   setUserLoginLoading,
+  setUserRegisterLoading
 } from "./userSlice";
 
 function* registerNewUser(action) {
+  yield put(setUserRegisterLoading(true));
   const response = yield call(addNewUser, action.payload);
+  yield put(setUserRegisterLoading(false));
   if (!response.error) {
     yield put(setAddNewUserStatus(response));
   } else {

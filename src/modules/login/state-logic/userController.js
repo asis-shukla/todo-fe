@@ -30,8 +30,13 @@ const UserController = () => {
   const addNewUserStatus = useSelector((state) => state.user.addNewUserStatus);
 
   const loggedInUserData = useSelector((state) => state.user.loggedInUser);
+
   const isUserLoginLoading = useSelector(
     (state) => state.user.isUserLoginLoading
+  );
+
+  const isUserRegisterLoading = useSelector(
+    (state) => state.user.isUserRegisterLoading
   );
 
   return {
@@ -42,6 +47,7 @@ const UserController = () => {
     resetAddNewUserStatus,
     setUserLoginData,
     isUserLoginLoading,
+    isUserRegisterLoading,
   };
 };
 
