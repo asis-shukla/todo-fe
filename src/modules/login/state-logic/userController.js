@@ -25,11 +25,14 @@ const UserController = () => {
 
   const setUserLoginData = (userData) => {
     dispatch(setLoggedInUser(userData));
-  } 
+  };
 
   const addNewUserStatus = useSelector((state) => state.user.addNewUserStatus);
 
   const loggedInUserData = useSelector((state) => state.user.loggedInUser);
+  const isUserLoginLoading = useSelector(
+    (state) => state.user.isUserLoginLoading
+  );
 
   return {
     registerNewUser,
@@ -37,7 +40,8 @@ const UserController = () => {
     loggedInUserData,
     addNewUserStatus,
     resetAddNewUserStatus,
-    setUserLoginData
+    setUserLoginData,
+    isUserLoginLoading,
   };
 };
 

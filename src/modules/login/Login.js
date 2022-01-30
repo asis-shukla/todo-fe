@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, TextField } from "@mui/material";
+import { Button, CircularProgress, TextField } from "@mui/material";
 import UserController from "./state-logic/userController";
 
 const initialLoginFormState = {
@@ -33,40 +33,44 @@ function Login() {
   return (
     <div>
       <h1>Log In</h1>
-      <form>
-        <TextField
-          type={"email"}
-          fullWidth={true}
-          required={true}
-          label="Email"
-          name="email"
-          variant="outlined"
-          autoFocus={true}
-          onChange={handleOnChange}
-          value={loginFormState.email}
-          // error={errorMsg != null}
-          // helperText={errorMsg}
-          autoComplete="email"
-        />
-        <br />
-        <br />
-        <TextField
-          type="password"
-          name="password"
-          required={true}
-          fullWidth={true}
-          label="Password"
-          autoComplete="password"
-          value={loginFormState.password}
-          onChange={handleOnChange}
-          onKeyPress={handleOnKeyPress}
-        />
-        <br />
-        <br />
-        <Button type="submit" variant="contained" onClick={handleSubmit}>
-          LogIn
-        </Button>
-      </form>
+      {userController.isUserLoginLoading ? (
+        <CircularProgress />
+      ) : (
+        <form>
+          <TextField
+            type={"email"}
+            fullWidth={true}
+            required={true}
+            label="Email"
+            name="email"
+            variant="outlined"
+            autoFocus={true}
+            onChange={handleOnChange}
+            value={loginFormState.email}
+            // error={errorMsg != null}
+            // helperText={errorMsg}
+            autoComplete="email"
+          />
+          <br />
+          <br />
+          <TextField
+            type="password"
+            name="password"
+            required={true}
+            fullWidth={true}
+            label="Password"
+            autoComplete="password"
+            value={loginFormState.password}
+            onChange={handleOnChange}
+            onKeyPress={handleOnKeyPress}
+          />
+          <br />
+          <br />
+          <Button type="submit" variant="contained" onClick={handleSubmit}>
+            LogIn
+          </Button>
+        </form>
+      )}
     </div>
   );
 }

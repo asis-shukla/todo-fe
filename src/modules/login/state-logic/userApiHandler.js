@@ -12,7 +12,7 @@ export const addNewUser = async (payloadBody) => {
   }
 };
 
-export const loginUser = async (payloadBody) => {
+export async function  loginUser(payloadBody) {
   try {
     const response = await axios.post(`${usersUrl}/login`, payloadBody);
     const access_token = response.data.token;

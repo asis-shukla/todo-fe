@@ -2,7 +2,11 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { addNewUser, loginUser } from "./userApiHandler";
 
 import userActionConstants from "./userConstants";
-import { setAddNewUserStatus, setLoggedInUser } from "./userSlice";
+import {
+  setAddNewUserStatus,
+  setLoggedInUser,
+  setUserLoginLoading,
+} from "./userSlice";
 
 function* registerNewUser(action) {
   const response = yield call(addNewUser, action.payload);
@@ -14,7 +18,9 @@ function* registerNewUser(action) {
 }
 
 function* makeUserlogin(action) {
+  yield put(setUserLoginLoading(true));
   const response = yield call(loginUser, action.payload);
+  yield put(setUserLoginLoading(false));
   if (!response?.error) {
     yield put(setLoggedInUser(response));
   } else {
