@@ -27,8 +27,10 @@ function* fetchToDos(action) {
 
 function* addToDo(action) {
   try {
+    yield put(todoListLoading(true));
     const response = yield call(addToDoData, action.payload);
     yield put(addToDoInList(response));
+    yield put(todoListLoading(false));
   } catch (error) {
     throw console.error(error);
   }
