@@ -37,6 +37,7 @@ function Login() {
         <CircularProgress />
       ) : (
         <form>
+          <p style={{color: "red"}}>{ userController?.loggedInUserData?.error?.message} </p>
           <TextField
             type={"email"}
             fullWidth={true}
