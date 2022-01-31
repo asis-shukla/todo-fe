@@ -4,6 +4,7 @@ import {
   addToDoData,
   deleteAllToDos,
   updateTodoCall,
+  deleteSingleToDo,
 } from "./todoApiHandler";
 import {
   fetchToDoList,
@@ -57,11 +58,25 @@ function* updateSingletodo(action) {
   }
 }
 
+function* deleteOneTodo(action) {
+  const response = yield call(deleteSingleToDo, action.id);
+  yield put(todoListLoading(true));
+  const todoData = yield call(fetchToDoData);
+  yield put(fetchToDoList(todoData));
+  yield put(todoListLoading(false));
+  if (!response.error) {
+    console.log("deleted");
+  } else {
+    throw console.error(response.error);
+  }
+}
+
 function* todoSaga() {
   yield takeLatest(todoActionConstansts.TODO_FETCH_REQUESTED, fetchToDos);
   yield takeLatest(todoActionConstansts.ADD_NEW_TODO, addToDo);
   yield takeLatest(todoActionConstansts.DELETE_ALL_TODOS, deleteAllTodos);
   yield takeLatest(todoActionConstansts.UPDATE_SINGLE_TODO, updateSingletodo);
+  yield takeLatest(todoActionConstansts.DELETE_ONE_TODO, deleteOneTodo);
 }
 
 export default todoSaga;

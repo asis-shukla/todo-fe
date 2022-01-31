@@ -35,6 +35,17 @@ export function deleteAllToDos(params) {
     });
 }
 
+export function deleteSingleToDo(id) {
+  return axios
+    .delete(`${todoUrl}/${id}`)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      return err;
+    });
+}
+
 export function updateTodoCall(payloadBody, id) {
   return axios
     .put(`${todoUrl}/${id}`, payloadBody)

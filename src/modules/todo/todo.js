@@ -47,6 +47,10 @@ function Todo({ loggedInUser }) {
     todoController.updateSingleTodo(payload, id);
   };
 
+  const deleteTodo = (e) => {
+    todoController.deleteOneTodo(e.target.id);
+  };
+
   return (
     <Container
       sx={{
@@ -97,6 +101,7 @@ function Todo({ loggedInUser }) {
         <TodoList
           todoDataList={todoController.todoList.data}
           updateTodo={updateTodo}
+          deleteTodo={deleteTodo}
         />
       )}
     </Container>

@@ -5,9 +5,9 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import EditIcon from "@mui/icons-material/Edit";
+import { DeleteOutline } from "@mui/icons-material";
 
-export default function TodoList({ todoDataList, updateTodo }) {
+export default function TodoList({ todoDataList, updateTodo, deleteTodo }) {
   const handleToggle = (e) => {
     let todoID = e.target.offsetParent.id;
     if (!todoID) {
@@ -41,8 +41,13 @@ export default function TodoList({ todoDataList, updateTodo }) {
             id={value._id}
             key={value._id}
             secondaryAction={
-              <IconButton edge="end" aria-label="comments">
-                <EditIcon />
+              <IconButton
+                id={value._id}
+                edge="end"
+                aria-label="comments"
+                onClick={(e) => deleteTodo(e)}
+              >
+                <DeleteOutline id={value._id}/>
               </IconButton>
             }
             sx={{ padding: "0px" }}
