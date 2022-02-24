@@ -15,6 +15,7 @@ function* registerNewUser(action) {
   yield put(setUserRegisterLoading(false));
   if (!response.error) {
     yield put(setAddNewUserStatus(response));
+    yield put(setLoggedInUser(response));
   } else {
     yield put(setAddNewUserStatus(response));
   }
