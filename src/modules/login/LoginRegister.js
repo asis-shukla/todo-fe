@@ -7,11 +7,16 @@ import UserController from "./state-logic/userController";
 
 function LoginRegister({ setloggedInUser }) {
   const [showLoginForm, setshowLoginForm] = useState(true);
-  const userController = UserController();
+  const {
+    addNewUserStatus,
+    loggedInUserData,
+    isUserRegisterLoading,
+    resetAddNewUserStatus,
+  } = UserController();
 
   useEffect(() => {
-    if (userController.addNewUserStatus) {
-      const { error } = userController.addNewUserStatus;
+    if (addNewUserStatus) {
+      const { error } = addNewUserStatus;
       if (error && error.type === "VALIDATION_ERROR") {
         setshowLoginForm(false);
       } else if (error && error.type === "DUPLICATE_RESOURCE_ERROR") {
@@ -20,18 +25,15 @@ function LoginRegister({ setloggedInUser }) {
         setshowLoginForm(true);
       }
     }
-  }, [userController.addNewUserStatus, setshowLoginForm]);
+  }, [addNewUserStatus, setshowLoginForm]);
 
   useEffect(() => {
-    if (
-      userController.loggedInUserData &&
-      !userController.loggedInUserData.error
-    ) {
-      setloggedInUser(userController.loggedInUserData);
+    if (loggedInUserData && !loggedInUserData.error) {
+      setloggedInUser(loggedInUserData);
     } else {
       setloggedInUser(null);
     }
-  }, [userController.loggedInUserData, setloggedInUser]);
+  }, [loggedInUserData, setloggedInUser]);
 
   const renderRequiredForm = () => {
     if (showLoginForm) {
@@ -41,16 +43,17 @@ function LoginRegister({ setloggedInUser }) {
     }
   };
 
-  return userController.isUserRegisterLoading ? (
+  return isUserRegisterLoading ? (
     <CircularProgress />
   ) : (
     <Container maxWidth="sm">
+      <p style={{ color: "red" }}> {addNewUserStatus?.error?.message} </p>
       {renderRequiredForm()}
       <span style={{ marginLeft: "35%" }}>
         {showLoginForm ? "Not a User" : "Already a user"}
         <Button
           onClick={() => {
-            userController.resetAddNewUserStatus();
+            resetAddNewUserStatus();
             setshowLoginForm(!showLoginForm);
           }}
         >
