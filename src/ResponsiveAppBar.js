@@ -37,11 +37,12 @@ const ResponsiveAppBar = ({ handleLogOut, loggedInUser }) => {
               </>
             ) : null}
           </Box>
-
-          <MenuItem onClick={handleLogOut}>
-            <LogoutIcon/>
-            Log Out
-          </MenuItem>
+          {loggedInUser ? (
+            <MenuItem onClick={handleLogOut}>
+              <LogoutIcon />
+              Log Out
+            </MenuItem>
+          ) : null}
         </Toolbar>
       </Container>
     </AppBar>
